@@ -2,7 +2,7 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
@@ -17,7 +17,7 @@ static const char col_gray1[]       = "#282828";/*"#ebdbb2";*/
 static const char col_gray2[]       = "#d5c4a1";
 static const char col_gray3[]       = "#bdae93";
 static const char col_gray4[]       = "#a89984";
-static const char col_cyan[]        = "#fabd2f";
+static const char col_cyan[]        = "#b8bb26";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -32,9 +32,10 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class         			 instance    title       tags mask     isfloating   monitor */
+	/* class         			 instance    title       		tags mask     isfloating   monitor */
 	{ "Gimp",        			  NULL,       NULL,     	 	1 << 4,       0,           -1 },
 	{ "Pavucontrol", 			  NULL,       NULL,     	 	0,            1,           -1 },
+	{ "Galculator", 			  NULL,       NULL,     	 	0,            1,           -1 },
 	{ "Firefox",     			  NULL,       NULL,     	 	1 << 1,       0,           -1 },
 	{ "qutebrowser", 			  NULL,       NULL,     	 	1 << 1,       0,           -1 },
 	{ "discord",     			  NULL,       NULL,     	 	1 << 6,       0,           -1 },
@@ -43,8 +44,9 @@ static const Rule rules[] = {
 	{ "VSCodium",     			  NULL,       NULL,     	 	1 << 2,       0,           -1 },
 	{ "VirtualBox Manager", 	  NULL,       NULL,				1 << 8,       0,           -1 },
 	{ "libreoffice-startcenter",  NULL,       NULL,				1 << 5,       0,           -1 },
+	{ "libreoffice-startcenter",  NULL,       NULL,				1 << 5,       0,           -1 },
 	{ NULL,  					  NULL,       "spt",			1 << 3,       0,           -1 },
-	{ NULL,  					  NULL,       "AutoDockTools",	1 << 3,       0,           -1 },
+	{ NULL,  					  NULL,       "AutoDockTools",	1 << 7,       0,           -1 },
 };
 
 /* layout(s) */
@@ -74,6 +76,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]   = { "dmenu_run", /* "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray1,*/ NULL };
 static const char *termcmd[]    = { "st", NULL };
+static const char *nmcmd[]    	= { "st", "-e", "nmtui", NULL };
 static const char *roficmd[]    = { "rofi", "-show", "drun", NULL };
 static const char *wroficmd[]   = { "/home/egemen/.local/bin/rofi_web.sh", NULL };
 static const char *yroficmd[]   = { "/home/egemen/.local/bin/rofi_ytb.sh", NULL };
@@ -82,7 +85,7 @@ static const char *vimcmd[]     = { "st", "-e", "vim", NULL };
 static const char *sptcmd[]     = { "st", "-e", "spt", NULL };
 static const char *rangercmd[]  = { "st", "-e", "ranger", NULL };
 static const char *firefoxcmd[] = { "primusrun", "firefox", NULL };
-static const char *browsecmd[]  = { "qutebrowser", NULL };
+// static const char *browsecmd[]  = { "qutebrowser", NULL };
 static const char *audiocmd[]   = { "pavucontrol", NULL };
 static const char *officecmd[]  = { "libreoffice", NULL };
 static const char *mendelcmd[]  = { "mendeleydesktop", NULL };
@@ -105,7 +108,7 @@ static Key keys[] = {
 	{ MODKEY,		    XK_y,                    spawn,          {.v = yroficmd } },
 	{ MODKEY,           XK_a,                    spawn,          {.v = audiocmd } },
 	{ MODKEY,           XK_g,                    spawn,          {.v = gimpcmd } },
-	{ MODKEY,           XK_b,                    spawn,          {.v = browsecmd } },
+	{ MODKEY,           XK_b,                    spawn,          {.v = nmcmd } },
 	{ MODKEY,           XK_f,                    spawn,          {.v = firefoxcmd } },
 	{ MODKEY,           XK_v,                    spawn,          {.v = vimcmd } },
 	{ MODKEY,           XK_s,                    spawn,          {.v = sptcmd } },
